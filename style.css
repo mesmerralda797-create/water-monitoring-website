@@ -1,0 +1,3 @@
+.dashboard { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 20px; }
+.gauge { background: #f4f4f4; padding: 20px; text-align: center; border-radius: 10px; font-weight: bold; }
+.chart-container { grid-column: span 3; height: 300px; background: white; padding: 20px; }
