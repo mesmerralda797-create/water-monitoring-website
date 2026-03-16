@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Water Quality Monitor Dashboard</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>ESP32 Real-time Monitor</title>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
 </head>
 <body>
-    <div class="dashboard">
-        <div class="gauge">Wat Level: <span id="level">0</span>%</div>
-        <div class="gauge">TDS: <span id="tds">0</span> ppm</div>
-        <div class="gauge">Temp: <span id="temp">0</span> °C</div>
-        
-        <div class="chart-container">
-            <canvas id="historyChart"></canvas>
-        </div>
+    <h1>Water Purity Monitor</h1>
+    <div id="dashboard">
+        <p>Temperature: <span id="temp">--</span>°C</p>
+        <p>TDS Level: <span id="tds">--</span> ppm</p>
+        <p>Water Level: <span id="dist">--</span> cm</p>
     </div>
-    <script src="script.js"></script>
+
+    <script>
+        const socket = io("http://localhost:3000"); // Update with your server IP
+
+        socket.on('sensorUpdate', (data) => {
+            document.getElementById('temp').innerText = data.temp;
+            document.getElementById('tds').innerText = data.tds;
+            document.getElementById('dist').innerText = data.distance;
+        });
+    </script>
 </body>
 </html>
